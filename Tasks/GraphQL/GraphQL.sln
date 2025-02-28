@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL", "GraphQL\GraphQL.csproj", "{853A7FEA-3421-4EA8-94BB-0F132DDAA507}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.HotChocolateExample", "GraphQL.HotChocolateExample\GraphQL.HotChocolateExample.csproj", "{853A7FEA-3421-4EA8-94BB-0F132DDAA507}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

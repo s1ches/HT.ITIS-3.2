@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "wB8B7IJEjuz47OpW4JZGTmU+A7k12KKQwwJcPJrAIjU=",
+  "Source": "GraphQL.HotChocolateExample",
+  "BasePath": "_content/GraphQL.HotChocolateExample",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
