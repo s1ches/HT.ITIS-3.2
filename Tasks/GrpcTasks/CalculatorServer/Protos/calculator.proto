@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option csharp_namespace = "CalculatorServer";
+
+package calculator;
+
+service Calculator {
+  rpc Calculate(CalculateRequest)
+      returns (CalculateResponse);
+}
+
+message CalculateRequest {
+  double first_operand = 1;
+  double second_operand = 2;
+  Operation operation = 3;
+}
+
+message CalculateResponse {
+  double result = 1;
+}
+
+enum Operation{
+  Plus = 0;
+  Minus = 1;
+  Multiply = 2;
+  Divide = 3;
+}
