@@ -20,8 +20,8 @@ message CalculateResponse {
 }
 
 enum Operation{
-  Plus = 0;
-  Minus = 1;
-  Multiply = 2;
-  Divide = 3;
+  PLUS = 0;
+  MINUS = 1;
+  MULTIPLY = 2;
+  DIVIDE = 3;
 }

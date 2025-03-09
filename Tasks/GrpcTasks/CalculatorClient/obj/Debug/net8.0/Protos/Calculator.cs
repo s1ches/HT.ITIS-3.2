@@ -28,8 +28,8 @@ namespace CalculatorClient {
             "dWxhdGVSZXF1ZXN0EhUKDWZpcnN0X29wZXJhbmQYASABKAESFgoOc2Vjb25k",
             "X29wZXJhbmQYAiABKAESKAoJb3BlcmF0aW9uGAMgASgOMhUuY2FsY3VsYXRv",
             "ci5PcGVyYXRpb24iIwoRQ2FsY3VsYXRlUmVzcG9uc2USDgoGcmVzdWx0GAEg",
-            "ASgBKjoKCU9wZXJhdGlvbhIICgRQbHVzEAASCQoFTWludXMQARIMCghNdWx0",
-            "aXBseRACEgoKBkRpdmlkZRADMlYKCkNhbGN1bGF0b3ISSAoJQ2FsY3VsYXRl",
+            "ASgBKjoKCU9wZXJhdGlvbhIICgRQTFVTEAASCQoFTUlOVVMQARIMCghNVUxU",
+            "SVBMWRACEgoKBkRJVklERRADMlYKCkNhbGN1bGF0b3ISSAoJQ2FsY3VsYXRl",
             "EhwuY2FsY3VsYXRvci5DYWxjdWxhdGVSZXF1ZXN0Gh0uY2FsY3VsYXRvci5D",
             "YWxjdWxhdGVSZXNwb25zZUITqgIQQ2FsY3VsYXRvckNsaWVudGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
@@ -44,10 +44,10 @@ namespace CalculatorClient {
   }
   #region Enums
   public enum Operation {
-    [pbr::OriginalName("Plus")] Plus = 0,
-    [pbr::OriginalName("Minus")] Minus = 1,
-    [pbr::OriginalName("Multiply")] Multiply = 2,
-    [pbr::OriginalName("Divide")] Divide = 3,
+    [pbr::OriginalName("PLUS")] Plus = 0,
+    [pbr::OriginalName("MINUS")] Minus = 1,
+    [pbr::OriginalName("MULTIPLY")] Multiply = 2,
+    [pbr::OriginalName("DIVIDE")] Divide = 3,
   }
 
   #endregion
