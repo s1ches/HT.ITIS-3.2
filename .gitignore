@@ -10,10 +10,12 @@
 *.user
 *.userosscache
 *.sln.docstates
-
+*.DS_Store
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
-
+*/obj/
+*/bin/
+*.dll
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -249,7 +251,8 @@ FakesAssemblies/
 **/*.Server/GeneratedArtifacts
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
-
+**/bin/
+**/obj/
 # Paket dependency manager
 .paket/paket.exe
 paket-files/
