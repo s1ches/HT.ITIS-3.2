@@ -15,7 +15,8 @@ builder.Services
     .AddMutationConventions()
     .AddFiltering()
     .AddSorting()
-    .AddProjections();
+    .AddProjections()
+    ;
 
 var connectionString = builder.Configuration.GetSection("DbContextOptions").GetValue<string>("ConnectionString");
 builder.Services.AddDbContext<DataContext>(opt => opt.UseNpgsql(connectionString));
@@ -34,4 +35,4 @@ app
     .UseRouting()
     .UseEndpoints(endpoints => endpoints.MapGraphQL());
 
-app.Run();
+app.RunWithGraphQLCommands(args);

@@ -2,6 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.HotChocolateExample", "GraphQL.HotChocolateExample\GraphQL.HotChocolateExample.csproj", "{853A7FEA-3421-4EA8-94BB-0F132DDAA507}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.HotChocolateExample.Subscriptions", "GraphQL.HotChocolateExample.Subscriptions\GraphQL.HotChocolateExample.Subscriptions.csproj", "{D64AB963-EF79-48B9-A7FB-2A0E3EF09C40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.HotChocolateExample.Cache", "GraphQL.HotChocolateExample.Cache\GraphQL.HotChocolateExample.Cache.csproj", "{52272E37-D7EF-4727-965B-35A395EC36F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.HotChocolateExample.Gateway", "GraphQL.HotChocolateExample.Gateway\GraphQL.HotChocolateExample.Gateway.csproj", "{8082E253-1A6F-4B0C-9B45-A3739E77E2EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +18,17 @@ Global
 		{853A7FEA-3421-4EA8-94BB-0F132DDAA507}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{853A7FEA-3421-4EA8-94BB-0F132DDAA507}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{853A7FEA-3421-4EA8-94BB-0F132DDAA507}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D64AB963-EF79-48B9-A7FB-2A0E3EF09C40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D64AB963-EF79-48B9-A7FB-2A0E3EF09C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D64AB963-EF79-48B9-A7FB-2A0E3EF09C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D64AB963-EF79-48B9-A7FB-2A0E3EF09C40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52272E37-D7EF-4727-965B-35A395EC36F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52272E37-D7EF-4727-965B-35A395EC36F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52272E37-D7EF-4727-965B-35A395EC36F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52272E37-D7EF-4727-965B-35A395EC36F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8082E253-1A6F-4B0C-9B45-A3739E77E2EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8082E253-1A6F-4B0C-9B45-A3739E77E2EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8082E253-1A6F-4B0C-9B45-A3739E77E2EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8082E253-1A6F-4B0C-9B45-A3739E77E2EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,169 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+}
+
+"A segment of a collection."
+type AbilitiesCollectionSegment {
+  "Information to aid in pagination."
+  pageInfo: CollectionSegmentInfo!
+  "A flattened list of the items."
+  items: [Ability!]
+  totalCount: Int!
+}
+
+type Ability {
+  name: String!
+  heroes: [Hero!]!
+  id: UUID!
+}
+
+type AddAbilityPayload {
+  uuid: UUID
+}
+
+"Information about the offset pagination."
+type CollectionSegmentInfo {
+  "Indicates whether more items exist following the set defined by the clients arguments."
+  hasNextPage: Boolean!
+  "Indicates whether more items exist prior the set defined by the clients arguments."
+  hasPreviousPage: Boolean!
+}
+
+type Hero {
+  name: String!
+  age: Int!
+  description: String!
+  abilities: [Ability!]!
+  id: UUID!
+}
+
+"A segment of a collection."
+type HeroesCollectionSegment {
+  "Information to aid in pagination."
+  pageInfo: CollectionSegmentInfo!
+  "A flattened list of the items."
+  items: [Hero!]
+  totalCount: Int!
+}
+
+type Mutation {
+  addAbility(input: AddAbilityInput!): AddAbilityPayload!
+  removeAbility(input: RemoveAbilityInput!): RemoveAbilityPayload!
+}
+
+type Query {
+  heroes(skip: Int take: Int where: HeroFilterInput order: [HeroSortInput!]): HeroesCollectionSegment
+  abilities(skip: Int take: Int where: AbilityFilterInput order: [AbilitySortInput!]): AbilitiesCollectionSegment
+}
+
+type RemoveAbilityPayload {
+  boolean: Boolean
+}
+
+input AbilityFilterInput {
+  and: [AbilityFilterInput!]
+  or: [AbilityFilterInput!]
+  name: StringOperationFilterInput
+  heroes: ListFilterInputTypeOfHeroFilterInput
+  id: UuidOperationFilterInput
+}
+
+input AbilitySortInput {
+  name: SortEnumType
+  id: SortEnumType
+}
+
+input AddAbilityInput {
+  abilityName: String!
+}
+
+input HeroFilterInput {
+  and: [HeroFilterInput!]
+  or: [HeroFilterInput!]
+  name: StringOperationFilterInput
+  age: IntOperationFilterInput
+  description: StringOperationFilterInput
+  abilities: ListFilterInputTypeOfAbilityFilterInput
+  id: UuidOperationFilterInput
+}
+
+input HeroSortInput {
+  name: SortEnumType
+  age: SortEnumType
+  description: SortEnumType
+  id: SortEnumType
+}
+
+input IntOperationFilterInput {
+  eq: Int
+  neq: Int
+  in: [Int]
+  nin: [Int]
+  gt: Int
+  ngt: Int
+  gte: Int
+  ngte: Int
+  lt: Int
+  nlt: Int
+  lte: Int
+  nlte: Int
+}
+
+input ListFilterInputTypeOfAbilityFilterInput {
+  all: AbilityFilterInput
+  none: AbilityFilterInput
+  some: AbilityFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfHeroFilterInput {
+  all: HeroFilterInput
+  none: HeroFilterInput
+  some: HeroFilterInput
+  any: Boolean
+}
+
+input RemoveAbilityInput {
+  abilityId: UUID!
+}
+
+input StringOperationFilterInput {
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
+  neq: String
+  contains: String
+  ncontains: String
+  in: [String]
+  nin: [String]
+  startsWith: String
+  nstartsWith: String
+  endsWith: String
+  nendsWith: String
+}
+
+input UuidOperationFilterInput {
+  eq: UUID
+  neq: UUID
+  in: [UUID]
+  nin: [UUID]
+  gt: UUID
+  ngt: UUID
+  gte: UUID
+  ngte: UUID
+  lt: UUID
+  nlt: UUID
+  lte: UUID
+  nlte: UUID
+}
+
+enum SortEnumType {
+  ASC
+  DESC
+}
+
+"The `@specifiedBy` directive is used within the type system definition language to provide a URL for specifying the behavior of custom scalar definitions."
+directive @specifiedBy("The specifiedBy URL points to a human-readable specification. This field will only read a result for scalar types." url: String!) on SCALAR
+
+scalar UUID @specifiedBy(url: "https:\/\/tools.ietf.org\/html\/rfc4122")
