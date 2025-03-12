@@ -1,0 +1,24 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+}
+
+type AddHumanPayload {
+  humanModel: HumanModel
+}
+
+type HumanModel {
+  name: String!
+}
+
+type Mutation {
+  addHuman(input: AddHumanInput!): AddHumanPayload!
+}
+
+type Query {
+  human(key: String!): HumanModel
+}
+
+input AddHumanInput {
+  name: String!
+}
