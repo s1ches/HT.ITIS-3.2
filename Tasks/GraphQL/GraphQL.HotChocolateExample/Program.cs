@@ -15,8 +15,7 @@ builder.Services
     .AddMutationConventions()
     .AddFiltering()
     .AddSorting()
-    .AddProjections()
-    ;
+    .AddProjections();
 
 var connectionString = builder.Configuration.GetSection("DbContextOptions").GetValue<string>("ConnectionString");
 builder.Services.AddDbContext<DataContext>(opt => opt.UseNpgsql(connectionString));
