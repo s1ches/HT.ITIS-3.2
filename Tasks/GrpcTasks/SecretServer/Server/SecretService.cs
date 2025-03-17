@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using Common.Grpc;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
