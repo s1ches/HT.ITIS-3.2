@@ -5,6 +5,7 @@ admin:
       protocol: TCP
       address: 0.0.0.0
       port_value: 9901
+
 static_resources:
   listeners:
   - name: listener_0
@@ -32,10 +33,11 @@ static_resources:
                   cors:
                     allow_origin_string_match:
                     - safe_regex:
+                        engine_type: GoogleRE2  # Добавлено обязательное поле
                         regex: ".*"  # Разрешить все источники
                     allow_methods: "GET, POST, PUT, DELETE, OPTIONS"  # Разрешенные методы
                     allow_headers: "content-type, authorization"  # Разрешенные заголовки
-                    allow_credentials: true  # Разрешить передачу учетных данных (если нужно)
+                    allow_credentials: true  # Разрешить передачу учетных данных
                     max_age: "86400"  # Время кэширования preflight-запроса (в секундах)
           http_filters:
           - name: envoy.filters.http.cors
