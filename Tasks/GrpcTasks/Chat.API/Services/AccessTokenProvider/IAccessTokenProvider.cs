@@ -1,4 +1,4 @@
-namespace AuthServer.Services.AccessTokenProvider;
+namespace Chat.API.Services.AccessTokenProvider;
 
 public interface IAccessTokenProvider
 {

@@ -5,12 +5,13 @@
       dockerfile: Chat.API/Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: "http://+:80;http://+:81"  # Явно указываем порты 80 и 81
       JwtOptions__Secret: "some_secret_key_HAFHSDHASHDASHDHADHADHASDHADHLOLLOLOLROFLLMAODOTNET"
       JwtOptions__Issuer: "http://localhost:80"
       JwtOptions__Audience: "https://localhost:80"
       JwtOptions__AccessTokenLifetimeMinutes: 60
       DbConnectionString: "User ID=postgres;Password=postgres;Host=postgres-db;Port=5432;Database=data"
-      Kestrel__EndpointsDefault__Protocols: "Http2"
+      Kestrel__EndpointDefaults__Protocols: "Http2"
     ports:
       - "80:80"
       - "81:81"

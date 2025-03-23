@@ -1,5 +1,4 @@
 using System.Text;
-using AuthServer.Services.AccessTokenProvider;
 using Chat.API.Data;
 using Chat.API.Options;
 using Chat.API.Services.AccessTokenProvider;
@@ -24,6 +23,7 @@ builder.Services.AddScoped<IAccessTokenProvider, AccessTokenProvider>();
 
 var jwtOptions = new JwtOptions();
 builder.Configuration.GetSection(nameof(JwtOptions)).Bind(jwtOptions);
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -57,8 +57,8 @@ var app = builder.Build();
 using var scope = app.Services.CreateScope();
 var dbContext = scope.ServiceProvider.GetRequiredService<ChatDbContext>();
 
-if(dbContext.Database.GetPendingMigrations().Any())
-    dbContext.Database.Migrate();
+// if(dbContext.Database.GetPendingMigrations().Any())
+//     dbContext.Database.Migrate();
 
 app.UseCors("AllowAll");
 

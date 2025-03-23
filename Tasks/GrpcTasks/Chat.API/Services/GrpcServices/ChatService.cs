@@ -1,6 +1,6 @@
 using System.Text.Json;
-using AuthServer.Services.AccessTokenProvider;
 using Chat.API.Data;
+using Chat.API.Services.AccessTokenProvider;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
