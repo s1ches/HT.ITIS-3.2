@@ -1,61 +1,64 @@
+static_resources:
+  listeners:
+    - name: listener_0
+      address:
+        socket_address:
+          address: 0.0.0.0
+          port_value: 10000
+      filter_chains:
+        - filters:
+            - name: envoy.filters.network.http_connection_manager
+              typed_config:
+                "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+                stat_prefix: ingress_http
+                codec_type: AUTO
+                # УБРАН НЕКОРРЕКТНЫЙ CORS В КОНТЕКСТЕ МАРШРУТА
+                route_config:
+                  name: local_route
+                  virtual_hosts:
+                    - name: local_service
+                      domains: ["*"]
+                      routes:
+                        - match:
+                            prefix: "/"
+                          route:
+                            cluster: chat_service
+                http_filters:
+                  # CORS ФИЛЬТР ДОЛЖЕН БЫТЬ ПЕРВЫМ
+                  - name: envoy.filters.http.cors
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.cors.v3.Cors
+                      policy:
+                        allow_origin_string_match:
+                          - safe_regex:
+                              google_re2: {}  # ИСПРАВЛЕНО: google_re2 требует объекта
+                              regex: "^http://localhost:3000$"  # УКАЖИТЕ СВОЙ FRONTEND
+                        allow_methods: "GET, POST, PUT, DELETE, OPTIONS"
+                        allow_headers: "content-type, authorization, x-grpc-web"  # ДОБАВИТЕ x-grpc-web
+                        allow_credentials: true
+                        max_age: "86400"
+                  - name: envoy.filters.http.router  # ПОРЯДОК ФИЛЬТРОВ ВАЖЕН!
+             
+
+  clusters:
+    - name: chat_service
+      connect_timeout: 0.25s
+      type: LOGICAL_DNS
+      dns_lookup_family: V4_ONLY
+      lb_policy: ROUND_ROBIN
+      load_assignment:
+        cluster_name: chat_service
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address:
+                      address: chatapi
+                      port_value: 80
+
 admin:
   access_log_path: /tmp/admin_access.log
   address:
     socket_address:
-      protocol: TCP
       address: 0.0.0.0
       port_value: 9901
-
-static_resources:
-  listeners:
-  - name: listener_0
-    address:
-      socket_address:
-        protocol: TCP
-        address: 0.0.0.0
-        port_value: 10000
-    filter_chains:
-    - filters:
-      - name: envoy.filters.network.http_connection_manager
-        typed_config:
-          "@type": type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
-          stat_prefix: ingress_http
-          route_config:
-            name: local_route
-            virtual_hosts:
-            - name: local_service
-              domains: ["*"]
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                  cluster: chat_service
-                  cors:
-                    allow_origin_string_match:
-                    - safe_regex:
-                        engine_type: GoogleRE2  # Добавлено обязательное поле
-                        regex: ".*"  # Разрешить все источники
-                    allow_methods: "GET, POST, PUT, DELETE, OPTIONS"  # Разрешенные методы
-                    allow_headers: "content-type, authorization"  # Разрешенные заголовки
-                    allow_credentials: true  # Разрешить передачу учетных данных
-                    max_age: "86400"  # Время кэширования preflight-запроса (в секундах)
-          http_filters:
-          - name: envoy.filters.http.cors
-            typed_config:
-              "@type": type.googleapis.com/envoy.extensions.filters.http.cors.v3.Cors
-          - name: envoy.filters.http.router
-  clusters:
-  - name: chat_service
-    connect_timeout: 0.25s
-    type: LOGICAL_DNS
-    dns_lookup_family: V4_ONLY
-    lb_policy: ROUND_ROBIN
-    load_assignment:
-      cluster_name: chat_service
-      endpoints:
-      - lb_endpoints:
-        - endpoint:
-            address:
-              socket_address:
-                address: chatapi
-                port_value: 80
