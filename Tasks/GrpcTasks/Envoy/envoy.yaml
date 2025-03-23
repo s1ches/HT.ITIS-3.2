@@ -24,13 +24,12 @@ static_resources:
                             cluster: chat_service
                             timeout: 0s
                 http_filters:
-                  # CORS фильтр должен быть первым
                   - name: envoy.filters.http.cors
                     typed_config:
                       "@type": type.googleapis.com/envoy.extensions.filters.http.cors.v3.Cors
-                      policy:  # Поле policy ВНУТРИ typed_config
-                        allow_origin_string_match:
-                          - prefix: "*"  # Разрешить все origins (только для тестирования)
+                      policy:
+                        allow_origin:
+                          - "http://localhost:3000"
                         allow_methods: GET POST PUT DELETE OPTIONS
                         allow_headers: "content-type, authorization, x-grpc-web"
                         allow_credentials: true
