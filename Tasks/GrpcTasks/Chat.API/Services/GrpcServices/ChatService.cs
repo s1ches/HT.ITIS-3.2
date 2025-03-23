@@ -56,7 +56,6 @@ public class ChatService(
     {
         var userName = context.GetHttpContext().User.Identity!.Name!;
         logger.LogInformation("User with name: {name} trying to send message", userName);
-        logger.LogInformation("Message with content: {content} was sent", request.Message);
 
         if (string.IsNullOrWhiteSpace(request.Message))
             throw new RpcException(new Status(StatusCode.InvalidArgument, "Message cannot be empty"));
