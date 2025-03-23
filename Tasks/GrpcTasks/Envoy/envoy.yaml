@@ -24,34 +24,27 @@ static_resources:
                             cluster: chat_service
                             timeout: 0s
                 http_filters:
+                  # CORS фильтр должен быть первым
                   - name: envoy.filters.http.cors
                     typed_config:
                       "@type": type.googleapis.com/envoy.extensions.filters.http.cors.v3.Cors
-                      policy:
+                      policy:  # Поле policy ВНУТРИ typed_config
                         allow_origin_string_match:
-                          - prefix: "*"
-                        allow_methods: GET, PUT, DELETE, POST, OPTIONS
-                        allow_headers: "keep-alive, user-agent, cache-control, content-type, content-transfer-encoding, custom-header-1, x-accept-content-transfer-encoding, x-accept-response-streaming, x-user-agent, x-grpc-web, grpc-timeout"
-                        max_age: "1728000"
-                        expose_headers: "custom-header-1, grpc-status, grpc-message"
+                          - prefix: "*"  # Разрешить все origins (только для тестирования)
+                        allow_methods: GET POST PUT DELETE OPTIONS
+                        allow_headers: "content-type, authorization, x-grpc-web"
+                        allow_credentials: true
+                        max_age: "3600"
                   - name: envoy.filters.http.grpc_web
                     typed_config:
                       "@type": type.googleapis.com/envoy.extensions.filters.http.grpc_web.v3.GrpcWeb
                   - name: envoy.filters.http.router
 
-  # Секция clusters ДОЛЖНА БЫТЬ ВНУТРИ static_resources
   clusters:
     - name: chat_service
       connect_timeout: 0.25s
-      type: STRICT_DNS
+      type: STRICT_DNS  # Для Docker
       lb_policy: ROUND_ROBIN
-      health_checks:
-        timeout: 1s
-        interval: 5s
-        unhealthy_threshold: 2
-        healthy_threshold: 1
-        http_health_check:
-          path: "/grpc.health.v1.Health/Check"
       load_assignment:
         cluster_name: chat_service
         endpoints:
@@ -59,8 +52,8 @@ static_resources:
               - endpoint:
                   address:
                     socket_address:
-                      address: chat-service
-                      port_value: 80
+                      address: chat-service  # Имя сервиса из docker-compose
+                      port_value: 80        # Порт вашего gRPC-сервиса
 
 admin:
   access_log_path: /tmp/admin_access.log
