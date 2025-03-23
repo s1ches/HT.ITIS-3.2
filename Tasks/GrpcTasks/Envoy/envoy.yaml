@@ -33,20 +33,28 @@ static_resources:
                   - name: envoy.filters.http.grpc_web
                   - name: envoy.filters.http.cors
                   - name: envoy.filters.http.router
-  clusters:
-    - name: chat_service
-      connect_timeout: 0.25s
-      type: LOGICAL_DNS
-      lb_policy: ROUND_ROBIN
-      load_assignment:
-        cluster_name: chat_service
-        endpoints:
-          - lb_endpoints:
-              - endpoint:
-                  address:
-                    socket_address:
-                      address: http://localhost:80
-                      port_value: 80
+clusters:
+  - name: chat_service
+    connect_timeout: 0.25s
+    type: STRICT_DNS  # Используйте STRICT_DNS для Docker
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: chat_service
+      endpoints:
+        - lb_endpoints:
+            - endpoint:
+                address:
+                  socket_address:
+                    address: chat-service  # Имя сервиса из docker-compose
+                    port_value: 80        # Порт вашего gRPC-сервиса
+    # Добавьте health checks для проверки доступности
+    health_checks:
+      timeout: 1s
+      interval: 5s
+      unhealthy_threshold: 2
+      healthy_threshold: 1
+      http_health_check:
+        path: "/grpc.health.v1.Health/Check"  # Путь для health check (зависит от вашего сервиса)
 
 admin:
   access_log_path: /tmp/admin_access.log
