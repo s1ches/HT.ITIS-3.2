@@ -34,7 +34,6 @@
     ports:
       - "10000:10000"
       - "9901:9901"
-      - "10001:10001"
     volumes:
       - ./Envoy/envoy.yaml:/etc/envoy/envoy.yaml
         
