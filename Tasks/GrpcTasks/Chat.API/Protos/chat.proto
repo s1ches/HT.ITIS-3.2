@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option csharp_namespace = "Chat.API";
+
+import "google/protobuf/empty.proto";
+
+package chat;
+
+service Chat {
+  rpc GetMessages (GetMessagesRequest) returns (GetMessagesResponse);
+  rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
+  rpc SubscribeOnNewMessages(google.protobuf.Empty) returns (stream Message);
+  rpc GetAccessToken (GetAccessTokenRequest) returns (GetAccessTokenResponse);
+}
+
+message GetMessagesRequest {
+  int64 from = 1;
+  int64 to = 2;
+}
+
+message GetMessagesResponse {
+  int64 totalCount = 1;
+  repeated Message messages = 2;
+}
+
+message Message {
+  string user_name = 1;
+  int64 message_id = 2;
+  string message = 3;
+}
+
+message SendMessageRequest {
+  string message = 1;
+}
+
+message SendMessageResponse {
+  int64 message_id = 1;
+}
+
+message GetAccessTokenRequest {
+  string user_name = 1;
+}
+
+message GetAccessTokenResponse {
+  string jwt = 1;
+}
+
+
+
