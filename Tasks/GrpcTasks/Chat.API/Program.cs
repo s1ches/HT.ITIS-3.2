@@ -11,10 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
-builder.Services.AddDistributedMemoryCache(opt =>
-{
-    opt.ExpirationScanFrequency = TimeSpan.FromSeconds(10);
-});
 
 builder.Services.AddDbContext<ChatDbContext>(opt =>
     opt.UseNpgsql(builder.Configuration["DbConnectionString"]!));
@@ -57,8 +53,8 @@ var app = builder.Build();
 using var scope = app.Services.CreateScope();
 var dbContext = scope.ServiceProvider.GetRequiredService<ChatDbContext>();
 
-// if(dbContext.Database.GetPendingMigrations().Any())
-//     dbContext.Database.Migrate();
+if(dbContext.Database.GetPendingMigrations().Any())
+    dbContext.Database.Migrate();
 
 app.UseCors("AllowAll");
 

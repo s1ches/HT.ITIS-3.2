@@ -12,6 +12,11 @@ public class ChatDbContext : DbContext
     public ChatDbContext(DbContextOptions<ChatDbContext> options) : base(options)
     {
     }
+
+    protected override void OnModelCreating(ModelBuilder builder) 
+    {
+        builder.UseSerialColumns();
+    }
     
     public DbSet<Entities.Message> Messages { get; set; } = null!;
 }

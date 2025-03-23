@@ -1,21 +1,21 @@
-using System.Text.Json;
+using System.Collections.Concurrent;
 using Chat.API.Data;
 using Chat.API.Services.AccessTokenProvider;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
 
 namespace Chat.API.Services.GrpcServices;
 
 public class ChatService(
     ILogger<ChatService> logger,
     ChatDbContext dbContext,
-    IDistributedCache cache,
     IAccessTokenProvider accessTokenProvider)
     : Chat.ChatBase
 {
+    private static ConcurrentBag<IServerStreamWriter<Message>> _usersConnections = [];
+
     [Authorize]
     public override async Task<GetMessagesResponse> GetMessages(GetMessagesRequest request, ServerCallContext context)
     {
@@ -29,7 +29,7 @@ public class ChatService(
         var messages = await query
             .Select(x => new Message
             {
-                Message_ = x.Content,
+                Content = x.Content,
                 MessageId = x.Id,
                 UserName = x.UserName
             }).ToListAsync(context.CancellationToken);
@@ -56,26 +56,35 @@ public class ChatService(
     {
         var userName = context.GetHttpContext().User.Identity!.Name!;
         logger.LogInformation("User with name: {name} trying to send message", userName);
-        
+        logger.LogInformation("Message with content: {content} was sent", request.Message);
+
+        if (string.IsNullOrWhiteSpace(request.Message))
+            throw new RpcException(new Status(StatusCode.InvalidArgument, "Message cannot be empty"));
+
         var message = new Data.Entities.Message
         {
             Content = request.Message,
             UserName = userName,
         };
 
-        await dbContext.Messages.AddAsync(message, context.CancellationToken);
-        await cache.SetStringAsync(message.Id.ToString(), JsonSerializer.Serialize(new Message
-            {
-                MessageId = message.Id,
-                UserName = userName,
-                Message_ = message.Content
-            }),
-            context.CancellationToken);
-
+        var entry = await dbContext.Messages.AddAsync(message, context.CancellationToken);
         await dbContext.SaveChangesAsync(context.CancellationToken);
-        
-        logger.LogInformation("Message with id: {messageId} has been sent from user: {name}", message.Id, userName);
-        
+
+        var grpcMessageModel = new Message
+        {
+            MessageId = entry.Entity.Id,
+            UserName = userName,
+            Content = request.Message
+        };
+
+        var tasks = _usersConnections
+            .Select(connection => connection.WriteAsync(grpcMessageModel)).ToArray();
+
+        await Task.WhenAll(tasks);
+
+        logger.LogInformation("Message with id: {messageId} has been sent from user: {name}", entry.Entity.Id,
+            userName);
+
         return new SendMessageResponse
         {
             MessageId = message.Id
@@ -83,37 +92,30 @@ public class ChatService(
     }
 
     [Authorize]
-    public override async Task SubscribeOnNewMessages(Empty request, IServerStreamWriter<Message> responseStream,
+    public override Task SubscribeOnNewMessages(Empty request, IServerStreamWriter<Message> responseStream,
         ServerCallContext context)
     {
-        var userName = context.GetHttpContext().User.Identity!.Name!;
-        logger.LogInformation("User with name: {name} subscribe on new messages", userName);
-        
-        var lastMessageId = await dbContext.Messages
-            .OrderByDescending(x => x.Id)
-            .Select(x => x.Id)
-            .FirstOrDefaultAsync(context.CancellationToken);
-
-        if (lastMessageId == 0)
-            lastMessageId = 1;
-        
-        while (!context.CancellationToken.IsCancellationRequested)
+        try
         {
-            logger.LogInformation("Checking for new messages");
-            var cacheMessage = await cache.GetStringAsync((lastMessageId+1).ToString());
-            
-            if (cacheMessage == null)
+            logger.LogInformation("Subscribing to new messages, user with name: {name}",
+                context.GetHttpContext().User.Identity!.Name!);
+            _usersConnections.Add(responseStream);
+            while (!context.CancellationToken.IsCancellationRequested)
             {
-                logger.LogInformation("New messages not found found");
-                await Task.Delay(TimeSpan.FromSeconds(0.25), context.CancellationToken);
-                continue;
+               context.CancellationToken.ThrowIfCancellationRequested(); 
             }
-            
-            logger.LogInformation("New messages found, sending new message with id: {id}", lastMessageId + 1);
-            
-            var message = JsonSerializer.Deserialize<Message>(cacheMessage)!;
-            await responseStream.WriteAsync(message, context.CancellationToken);
-            lastMessageId = message.MessageId;
         }
+        catch (OperationCanceledException)
+        {
+            _usersConnections =
+                new ConcurrentBag<IServerStreamWriter<Message>>(
+                    _usersConnections
+                        .Where(x => x != responseStream));
+            logger.LogInformation("Subscription timeout for user: {name}",
+                context.GetHttpContext().User.Identity!.Name!);
+            throw;
+        }
+        
+        return Task.CompletedTask;
     }
 }

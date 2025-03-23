@@ -16,7 +16,7 @@ namespace Chat.API.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.Sequence),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     UserName = table.Column<string>(type: "text", nullable: false),
                     Content = table.Column<string>(type: "text", nullable: false)
                 },
