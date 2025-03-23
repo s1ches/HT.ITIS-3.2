@@ -12,7 +12,6 @@ static_resources:
                 "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
                 stat_prefix: ingress_http
                 codec_type: AUTO
-                # УБРАН НЕКОРРЕКТНЫЙ CORS В КОНТЕКСТЕ МАРШРУТА
                 route_config:
                   name: local_route
                   virtual_hosts:
@@ -24,27 +23,25 @@ static_resources:
                           route:
                             cluster: chat_service
                 http_filters:
-                  # CORS ФИЛЬТР ДОЛЖЕН БЫТЬ ПЕРВЫМ
+                  # CORS фильтр должен быть первым
                   - name: envoy.filters.http.cors
                     typed_config:
                       "@type": type.googleapis.com/envoy.extensions.filters.http.cors.v3.Cors
                       policy:
                         allow_origin_string_match:
-                          - safe_regex:
-                              google_re2: {}  # ИСПРАВЛЕНО: google_re2 требует объекта
-                              regex: "^http://localhost:3000$"  # УКАЖИТЕ СВОЙ FRONTEND
-                        allow_methods: "GET, POST, PUT, DELETE, OPTIONS"
-                        allow_headers: "content-type, authorization, x-grpc-web"  # ДОБАВИТЕ x-grpc-web
+                          - prefix: "http://localhost:3000"  # Ваш frontend origin
+                        allow_methods: GET POST PUT DELETE OPTIONS
+                        allow_headers: "content-type, authorization, x-grpc-web"
                         allow_credentials: true
-                        max_age: "86400"
-                  - name: envoy.filters.http.router  # ПОРЯДОК ФИЛЬТРОВ ВАЖЕН!
-             
-
+                        max_age: "3600"
+                  - name: envoy.filters.http.grpc_web
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.grpc_web.v3.GrpcWeb
+                  - name: envoy.filters.http.router
   clusters:
     - name: chat_service
       connect_timeout: 0.25s
       type: LOGICAL_DNS
-      dns_lookup_family: V4_ONLY
       lb_policy: ROUND_ROBIN
       load_assignment:
         cluster_name: chat_service
@@ -53,8 +50,8 @@ static_resources:
               - endpoint:
                   address:
                     socket_address:
-                      address: chatapi
-                      port_value: 80
+                      address: your-grpc-server.com
+                      port_value: 50051
 
 admin:
   access_log_path: /tmp/admin_access.log
