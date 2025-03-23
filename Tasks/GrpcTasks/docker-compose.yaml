@@ -9,7 +9,7 @@
       JwtOptions__Issuer: "http://localhost:80"
       JwtOptions__Audience: "https://localhost:80"
       JwtOptions__AccessTokenLifetimeMinutes: 60
-      DbConnectionString: "User ID=postgres;Password=root;Host=postgres-db;Port=5432;Database=data"
+      DbConnectionString: "User ID=postgres;Password=postgres;Host=postgres-db;Port=5432;Database=data"
       Kestrel__EndpointsDefault__Protocols: "Http2"
     ports:
       - "80:80"
