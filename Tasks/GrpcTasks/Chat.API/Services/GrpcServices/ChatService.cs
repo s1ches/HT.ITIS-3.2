@@ -44,6 +44,7 @@ public class ChatService(
     public override Task<GetAccessTokenResponse> GetAccessToken(GetAccessTokenRequest request,
         ServerCallContext context)
     {
+        logger.LogInformation("User with name: {name} trying to get access token", request.UserName);
         return Task.FromResult(new GetAccessTokenResponse
         {
             Jwt = accessTokenProvider.GetAccessToken(request.UserName)
