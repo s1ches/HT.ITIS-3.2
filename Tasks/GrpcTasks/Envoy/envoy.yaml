@@ -45,8 +45,8 @@ static_resources:
               - endpoint:
                   address:
                     socket_address:
-                      address: your-grpc-server.com
-                      port_value: 50051
+                      address: http://localhost:80
+                      port_value: 80
 
 admin:
   access_log_path: /tmp/admin_access.log
