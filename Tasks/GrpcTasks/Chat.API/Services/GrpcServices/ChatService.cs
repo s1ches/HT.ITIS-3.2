@@ -14,7 +14,7 @@ public class ChatService(
     IAccessTokenProvider accessTokenProvider)
     : Chat.ChatBase
 {
-    private static ConcurrentDictionary<string, IServerStreamWriter<Message>> _usersConnections = [];
+    private static readonly ConcurrentDictionary<string, IServerStreamWriter<Message>> UsersConnections = [];
 
     [Authorize]
     public override async Task<GetMessagesResponse> GetMessages(GetMessagesRequest request, ServerCallContext context)
@@ -76,7 +76,7 @@ public class ChatService(
             Content = request.Message
         };
 
-        var tasks = _usersConnections
+        var tasks = UsersConnections
             .Select(async connection =>
             {
                 try
@@ -86,7 +86,7 @@ public class ChatService(
                 catch (Exception ex)
                 {
                     logger.LogError(ex, ex.Message);
-                    _usersConnections.TryRemove(connection.Key, out _);
+                    UsersConnections.TryRemove(connection.Key, out _);
                 }
             })
             .ToArray();
@@ -110,7 +110,7 @@ public class ChatService(
         {
             logger.LogInformation("Subscribing to new messages, user with name: {name}",
                 context.GetHttpContext().User.Identity!.Name!);
-            _usersConnections.TryAdd(context.GetHttpContext().User.Identity!.Name!, responseStream);
+            UsersConnections.TryAdd(context.GetHttpContext().User.Identity!.Name!, responseStream);
             while (!context.CancellationToken.IsCancellationRequested)
             {
                 context.CancellationToken.ThrowIfCancellationRequested();
@@ -118,7 +118,7 @@ public class ChatService(
         }
         catch (OperationCanceledException)
         {
-            _usersConnections.TryRemove(context.GetHttpContext().User.Identity!.Name!, out _);
+            UsersConnections.TryRemove(context.GetHttpContext().User.Identity!.Name!, out _);
             logger.LogInformation("Subscription timeout for user: {name}",
                 context.GetHttpContext().User.Identity!.Name!);
             throw;
