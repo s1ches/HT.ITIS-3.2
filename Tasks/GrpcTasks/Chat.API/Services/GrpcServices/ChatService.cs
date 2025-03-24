@@ -77,8 +77,18 @@ public class ChatService(
         };
 
         var tasks = _usersConnections
-            .Select(connection => 
-                connection.Value.WriteAsync(grpcMessageModel, context.CancellationToken))
+            .Select(async connection =>
+            {
+                try
+                {
+                    await connection.Value.WriteAsync(grpcMessageModel, context.CancellationToken);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, ex.Message);
+                    _usersConnections.TryRemove(connection.Key, out _);
+                }
+            })
             .ToArray();
 
         await Task.WhenAll(tasks);
