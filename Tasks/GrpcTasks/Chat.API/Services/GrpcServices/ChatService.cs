@@ -14,7 +14,7 @@ public class ChatService(
     IAccessTokenProvider accessTokenProvider)
     : Chat.ChatBase
 {
-    private static ConcurrentBag<IServerStreamWriter<Message>> _usersConnections = [];
+    private static ConcurrentDictionary<string, IServerStreamWriter<Message>> _usersConnections = [];
 
     [Authorize]
     public override async Task<GetMessagesResponse> GetMessages(GetMessagesRequest request, ServerCallContext context)
@@ -77,7 +77,9 @@ public class ChatService(
         };
 
         var tasks = _usersConnections
-            .Select(connection => connection.WriteAsync(grpcMessageModel)).ToArray();
+            .Select(connection => 
+                connection.Value.WriteAsync(grpcMessageModel, context.CancellationToken))
+            .ToArray();
 
         await Task.WhenAll(tasks);
 
@@ -98,23 +100,20 @@ public class ChatService(
         {
             logger.LogInformation("Subscribing to new messages, user with name: {name}",
                 context.GetHttpContext().User.Identity!.Name!);
-            _usersConnections.Add(responseStream);
+            _usersConnections.TryAdd(context.GetHttpContext().User.Identity!.Name!, responseStream);
             while (!context.CancellationToken.IsCancellationRequested)
             {
-               context.CancellationToken.ThrowIfCancellationRequested(); 
+                context.CancellationToken.ThrowIfCancellationRequested();
             }
         }
         catch (OperationCanceledException)
         {
-            _usersConnections =
-                new ConcurrentBag<IServerStreamWriter<Message>>(
-                    _usersConnections
-                        .Where(x => x != responseStream));
+            _usersConnections.TryRemove(context.GetHttpContext().User.Identity!.Name!, out _);
             logger.LogInformation("Subscription timeout for user: {name}",
                 context.GetHttpContext().User.Identity!.Name!);
             throw;
         }
-        
+
         return Task.CompletedTask;
     }
 }
