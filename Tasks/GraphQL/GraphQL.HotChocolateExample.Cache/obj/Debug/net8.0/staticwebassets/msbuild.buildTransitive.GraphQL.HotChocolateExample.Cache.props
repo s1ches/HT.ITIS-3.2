@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../buildMultiTargeting/GraphQL.HotChocolateExample.Cache.props" />
-</Project>
