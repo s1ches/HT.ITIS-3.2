@@ -1,0 +1,15 @@
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/bin/Debug/net8.0/Orders.Common.deps.json
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/bin/Debug/net8.0/Orders.Common.runtimeconfig.json
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/bin/Debug/net8.0/Orders.Common.dll
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/bin/Debug/net8.0/Orders.Common.pdb
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/obj/Debug/net8.0/Orders.Common.csproj.AssemblyReference.cache
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/obj/Debug/net8.0/Orders.Common.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/obj/Debug/net8.0/Orders.Common.AssemblyInfoInputs.cache
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/obj/Debug/net8.0/Orders.Common.AssemblyInfo.cs
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/obj/Debug/net8.0/Orders.Common.csproj.CoreCompileInputs.cache
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/obj/Debug/net8.0/Orders.Common.sourcelink.json
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/obj/Debug/net8.0/Orders.Common.dll
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/obj/Debug/net8.0/refint/Orders.Common.dll
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/obj/Debug/net8.0/Orders.Common.pdb
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/obj/Debug/net8.0/Orders.Common.genruntimeconfig.cache
+/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Common/obj/Debug/net8.0/ref/Orders.Common.dll

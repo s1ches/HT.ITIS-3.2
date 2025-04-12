@@ -1,0 +1,24 @@
+{
+  "Version": 1,
+  "Hash": "zatAKRRQh2JrTKvby6IFQbyu6n0eYe2e6A6aaOzKgDI=",
+  "Source": "Orders.OutboxProcessor",
+  "BasePath": "_content/Orders.OutboxProcessor",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "/Users/ivansosorin/My/CSharp/Stud/HT.ITIS-3.2/Tasks/Orders/Orders.Management/Orders.Management.csproj",
+      "Version": 2,
+      "Source": "Orders.Management",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
