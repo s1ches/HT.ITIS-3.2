@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "OpenMeteoServer";
+
+package open_meteo;
+
+service OpenMeteoService {
+  rpc GetWeatherReportsStream(google.protobuf.Empty)
+      returns (stream WeatherReport);
+}
+
+message WeatherReport {
+  google.protobuf.Timestamp Time = 1;
+  double TemperatureInCelsius = 2;
+}
