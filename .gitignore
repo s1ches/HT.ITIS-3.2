@@ -1,0 +1,19 @@
+# Игнорировать bin/ и obj/ в любых подпапках
+**/bin/
+**/obj/
+
+# Rider & VS Code
+.idea/
+.vscode/
+
+# VS
+.vs/
+*.suo
+*.user
+*.cache
+
+# NuGet
+packages/
+project.lock.json
+project.nuget.cache
+*.DS_Store
