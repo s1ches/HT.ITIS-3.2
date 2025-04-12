@@ -1,0 +1,4 @@
+obj/Debug/net8.0/Protos/OpenMeteo.cs \
+obj/Debug/net8.0/Protos/OpenMeteoGrpc.cs: /Users/ivansosorin/.nuget/packages/grpc.tools/2.70.0/build/native/include/google/protobuf/empty.proto\
+ /Users/ivansosorin/.nuget/packages/grpc.tools/2.70.0/build/native/include/google/protobuf/timestamp.proto\
+ Protos/open_meteo.proto
