@@ -612,3 +612,23 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp,rider,aspnetcore,dotnetcore
+=======
+# Игнорировать bin/ и obj/ в любых подпапках
+**/bin/
+**/obj/
+
+# Rider & VS Code
+.idea/
+.vscode/
+
+# VS
+.vs/
+*.suo
+*.user
+*.cache
+
+# NuGet
+packages/
+project.lock.json
+project.nuget.cache
+*.DS_Store

@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "zuf5RThBLKXkEB/KN7OusetfWN88ot17fo6F+y60sCw=",
+  "Source": "SecretServer",
+  "BasePath": "_content/SecretServer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

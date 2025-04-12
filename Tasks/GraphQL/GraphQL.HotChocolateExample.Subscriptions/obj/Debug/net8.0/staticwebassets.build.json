@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Lm+MkYioFMonjNlB/pOwILeNEyjcUO3RFEAoHnCw7Ik=",
+  "Source": "GraphQL.HotChocolateExample.Subscriptions",
+  "BasePath": "_content/GraphQL.HotChocolateExample.Subscriptions",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -34,4 +34,4 @@ app
     .UseRouting()
     .UseEndpoints(endpoints => endpoints.MapGraphQL());
 
-app.Run();
+app.RunWithGraphQLCommands(args);
