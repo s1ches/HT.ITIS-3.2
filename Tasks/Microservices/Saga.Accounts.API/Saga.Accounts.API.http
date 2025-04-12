@@ -1,6 +1,0 @@
-@Saga.Accounts.API_HostAddress = http://localhost:5043
-
-GET {{Saga.Accounts.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
