@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickHouse", "ClickHouse\ClickHouse.csproj", "{64C12948-7725-49C1-A1FD-4C0E2CEAF325}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickHouse.Example", "ClickHouse.Example\ClickHouse.Example.csproj", "{EDBEC2FA-62F6-44E7-8379-4F82A0EF4A10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64C12948-7725-49C1-A1FD-4C0E2CEAF325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64C12948-7725-49C1-A1FD-4C0E2CEAF325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64C12948-7725-49C1-A1FD-4C0E2CEAF325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64C12948-7725-49C1-A1FD-4C0E2CEAF325}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDBEC2FA-62F6-44E7-8379-4F82A0EF4A10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDBEC2FA-62F6-44E7-8379-4F82A0EF4A10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDBEC2FA-62F6-44E7-8379-4F82A0EF4A10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDBEC2FA-62F6-44E7-8379-4F82A0EF4A10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
