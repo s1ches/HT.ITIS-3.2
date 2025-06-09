@@ -2,7 +2,7 @@ using System.Reflection;
 using ClickHouse.Client.ADO;
 using Common.Attributes;
 
-namespace ClickHouse;
+namespace CassandraVsClickHouse;
 
 public class ClickHouseContext(ClickHouseContextOptions options) : IDisposable, IAsyncDisposable
 {

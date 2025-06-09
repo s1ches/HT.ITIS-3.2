@@ -1,4 +1,4 @@
-using ClickHouse.Attributes;
+using Common.Attributes;
 
 namespace ClickHouse.Example;
 

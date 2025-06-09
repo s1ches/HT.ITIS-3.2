@@ -4,6 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickHouse", "ClickHouse\Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickHouse.Example", "ClickHouse.Example\ClickHouse.Example.csproj", "{EDBEC2FA-62F6-44E7-8379-4F82A0EF4A10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cassandra", "Cassandra\Cassandra.csproj", "{F29EF913-AB69-40B0-94B7-F0C837CFED76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CassandraVsClickHouse", "CassandraVsClickHouse\CassandraVsClickHouse.csproj", "{35EFE23B-0819-4C7B-9A80-7E8A2565E3AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{0B0EA10C-41C1-4BBB-8D38-E1A9CC212376}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +24,17 @@ Global
 		{EDBEC2FA-62F6-44E7-8379-4F82A0EF4A10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDBEC2FA-62F6-44E7-8379-4F82A0EF4A10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDBEC2FA-62F6-44E7-8379-4F82A0EF4A10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F29EF913-AB69-40B0-94B7-F0C837CFED76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29EF913-AB69-40B0-94B7-F0C837CFED76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29EF913-AB69-40B0-94B7-F0C837CFED76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29EF913-AB69-40B0-94B7-F0C837CFED76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35EFE23B-0819-4C7B-9A80-7E8A2565E3AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35EFE23B-0819-4C7B-9A80-7E8A2565E3AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35EFE23B-0819-4C7B-9A80-7E8A2565E3AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35EFE23B-0819-4C7B-9A80-7E8A2565E3AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B0EA10C-41C1-4BBB-8D38-E1A9CC212376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B0EA10C-41C1-4BBB-8D38-E1A9CC212376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B0EA10C-41C1-4BBB-8D38-E1A9CC212376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B0EA10C-41C1-4BBB-8D38-E1A9CC212376}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
